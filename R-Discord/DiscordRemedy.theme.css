@@ -1,0 +1,453 @@
+/*//META{"name":"Discord Remedy","description":"Same Discord, but smoother, prettier and cooler. Works with both dark and light themes.","author":"Yolan'","version":"1.0","website":"https://twitter.com/Yolanare"}*//**/ 
+
+
+:root {
+    --tr-smooth-2-t: cubic-bezier(0.5, 0.2, 0, 1);
+    --tr-smooth-1-t: cubic-bezier(0.4, 0, 0, 1);
+
+    --tr-quick-3-t: cubic-bezier(0.5, 0.4, 0, 1);
+    --tr-quick-3: 0.6s var(--tr-quick-2-t);
+    --tr-quick-2-t: cubic-bezier(0.3, 0.6, 0, 1);
+    --tr-quick-1-t: cubic-bezier(0.25, 0.7, 0, 1);
+    --tr-quick-1: 0.6s var(--tr-quick-1-t);
+    --tr-quick-11-t: cubic-bezier(0.2, 0.8, 0, 1);
+
+    --tr-normal-21: 0.5s ease;
+    --tr-normal-2: 0.3s ease;
+    --tr-normal-1: 0.17s ease;
+    --tr-normal-11: 0.13s ease;
+    --tr-normal-111: 75ms ease;
+    --tr-normal-1111: 50ms linear;
+
+    --blurple: rgb(114, 137, 218); /*#7289da*/
+    --blurple-light: rgb(123, 149, 237);
+    --text-link: var(--blurple-light);
+}
+::selection {
+    color: #f5f5f5;
+    background: rgba(114, 137, 218, 0.65);
+}
+
+/*/ ANIMATIONS /*/
+@keyframes opacity-fadein {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes opacity-fadein-delay5 {
+    0% { opacity: 0; }
+    5% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/*/ TRANSITIONS /*/
+div[class*="container"] > section[class*="container"] div[class*="item"] /*toolbar tabs*/,
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"] div[class*="channelNameChange"] > div[class*="content"] > strong /*chat logs channel name change*/,
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"] a[class*="anchorUnderlineOnHover"] /*chat logs users*/ {
+    transition: var(--tr-normal-2);
+}
+div[class*="container"] > section[class*="container"] div[class*="item"],
+div[class*="chat"] div[id*="messages"] div[class*="blockedSystemMessage"] span[class*="blockedAction"] /*blocked msg*/,
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="channelNameChange"] > div[class*="content"] > strong,
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover a[class*="anchorUnderlineOnHover"] {
+    transition: var(--tr-normal-1);
+}
+
+
+/*/ USER AREA /*/
+section[class^="panels"][aria-label] > div[class^="container"] {
+    height: 65px;
+}
+
+
+/*/ HOME /*/
+/*/ FRIENDS /*/
+    /* SECONDARY */
+        /* "FIND CONV" (top) */
+div[class*="sidebar"] > nav > div[class*="searchBar"] > button /*search icon*/ {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" style="color:rgb(114, 118, 125);" width="18" height="18" viewBox="0 0 18 18"><g><path fill="currentColor" d="M3.60091481,7.20297313 C3.60091481,5.20983419 5.20983419,3.60091481 7.20297313,3.60091481 C9.19611206,3.60091481 10.8050314,5.20983419 10.8050314,7.20297313 C10.8050314,9.19611206 9.19611206,10.8050314 7.20297313,10.8050314 C5.20983419,10.8050314 3.60091481,9.19611206 3.60091481,7.20297313 Z M12.0057176,10.8050314 L11.3733562,10.8050314 L11.1492281,10.5889079 C11.9336764,9.67638651 12.4059463,8.49170955 12.4059463,7.20297313 C12.4059463,4.32933105 10.0766152,2 7.20297313,2 C4.32933105,2 2,4.32933105 2,7.20297313 C2,10.0766152 4.32933105,12.4059463 7.20297313,12.4059463 C8.49170955,12.4059463 9.67638651,11.9336764 10.5889079,11.1492281 L10.8050314,11.3733562 L10.8050314,12.0057176 L14.8073185,16 L16,14.8073185 L12.2102538,11.0099776 L12.0057176,10.8050314 Z"></path></g></svg>');
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position-x: 97.5%;
+    background-position-y: center;
+}
+
+        /* PEOPLE LISTS (DM, MEMBERS) */
+div[class*="sidebar"] > nav[class*="privateChannels"] h2 /*DM title*/ {
+    transition: color var(--tr-normal-2);
+}
+
+div[class*="sidebar"] > nav[class*="privateChannels"] a > div[class*="layout"],
+div[class*="sidebar"] > nav[class*="privateChannels"] h2 > div > svg /*create dm icon*/ {
+    transition: var(--tr-normal-2);
+    transition-property: color, background-color, border-top-left-radius, border-bottom-left-radius;
+}
+div[class*="sidebar"] > nav[class*="privateChannels"] a:hover > div[class*="layout"],
+div[class*="sidebar"] > nav[class*="privateChannels"] h2:hover,
+div[class*="sidebar"] > nav[class*="privateChannels"] h2 > div > svg:hover {
+    transition: color var(--tr-normal-1),
+                background-color var(--tr-normal-1),
+                border-top-left-radius 0.5s var(--tr-quick-2-t),
+                border-bottom-left-radius 0.5s var(--tr-quick-2-t);
+}
+div[class*="sidebar"] > nav[class*="privateChannels"] a,
+div[class*="sidebar"] > nav[class*="privateChannels"] a > div[class*="layout"] {
+    border-top-left-radius: 30px !important;
+    border-bottom-left-radius: 30px !important;
+}
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"],
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] > div[class*="layout"] {
+    border-radius: 4px !important;
+}
+
+            /*DM close button*/
+div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="children"] > div {
+    display: block;
+    transform: translateX(50px);
+    transition: opacity 50ms var(--tr-normal-2),
+                transform 1.35s var(--tr-quick-2-t);
+    pointer-events: none;
+}
+
+div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] > div /*hover*/,
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="children"] > div /*selected*/ {
+    display: block;
+    opacity: 0.5;
+    transform: translateX(0px);
+    pointer-events: all;
+}
+div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] > div {
+    transition: opacity var(--tr-normal-2),
+                transform 0.5s 0.4s var(--tr-quick-1-t);
+}
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="children"] > div {
+    transition: opacity var(--tr-normal-2),
+                transform 0.5s var(--tr-quick-1-t);
+}
+div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] > div:hover,
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"]:hover div[class*="children"] > div:hover {
+    opacity: 1;
+    transition: opacity var(--tr-normal-1),
+                transform 0.5s 0.4s var(--tr-quick-1-t);
+}
+
+div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="children"] svg {
+    color: transparent;
+    transition: color var(--tr-normal-2);
+}
+div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] svg,
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="children"] svg {
+    color: var(--interactive-active);
+    transition: color var(--tr-normal-2);
+}
+div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] svg {
+    transition: color var(--tr-normal-2) 0.425s;
+}
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="children"] svg {
+    transition: color var(--tr-normal-2);
+}
+
+
+    /* PRIMARY */
+        /* BIG PEOPLE LIST --background-modifier-hover*/
+/*box*/
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"] {
+    border-radius: 8px;
+    border-top-color: transparent;
+    margin: 0 10px 0 20px;
+    padding: 0;
+}
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"] > div[class*="listItemContents"] {
+    border-top: 1px solid var(--background-modifier-accent);
+    padding: 16px 10px;
+    transition: var(--tr-normal-2);
+}
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"] {
+    transition: background-color 0.175s cubic-bezier(0.85, 0.6, 1, 0.8);
+}
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"]:hover {
+    transition: background-color var(--tr-normal-1) !important;
+}
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"]:hover > div[class*="listItemContents"],
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"]:hover + div[class*="peopleListItem"] > div[class*="listItemContents"] {
+    border-top-color: transparent;
+    transition: var(--tr-normal-1);
+}
+
+/*discordtag*/
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"] div[class*="discordTag"] > span[class*="username"],
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"] div[class*="subtext"] {
+    opacity: 0.75;
+    transition: opacity var(--tr-normal-2);
+}
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"]:hover div[class*="discordTag"] > span[class*="username"],
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"]:hover div[class*="subtext"] {
+    opacity: 1;
+    transition: opacity var(--tr-normal-21);
+}
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"] div[class*="discordTag"] > span[class*="discriminator"] {
+    visibility: visible;
+    margin-left: 1px;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.35s var(--tr-smooth-1-t),
+                transform 0.8s var(--tr-smooth-2-t);
+}
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"]:hover div[class*="discordTag"] > span[class*="discriminator"] {
+    opacity: 1;
+    transform: translateX(0px);
+    transition: opacity 0.4s var(--tr-smooth-2-t),
+                transform 0.25s var(--tr-quick-2-t);
+}
+/*action buttons*/
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"] div[class*="actionButton"] {
+    transition: var(--tr-normal-2);
+}
+
+        /* ACTIVE NOW */
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] {
+transition: var(--tr-normal-21);
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover {
+transition: var(--tr-normal-1);
+}
+
+
+/*/ SEARCHBARS /*/
+/*box*/
+div[class*="sidebar"] > nav > div[class*="searchBar"] > button /*HOME find conv*/,
+div[class*="searchBarComponent"],
+div[class*="searchBar"][role][aria-label][aria-expanded] /*PRIMARY toolbar*/ {
+    filter: contrast(1);
+    transition: filter var(--tr-normal-21),
+                width var(--tr-quick-3);
+}
+div[class*="sidebar"] > nav > div[class*="searchBar"] > button:hover,
+div[class*="searchBarComponent"]:hover,
+div[class*="searchBar"][role][aria-label][aria-expanded]:hover,
+div[class*="search"][class*="open"] > div[class*="searchBar"][role][aria-label][aria-expanded] {
+    filter: contrast(1.065);
+    transition: filter var(--tr-normal-1),
+                width var(--tr-quick-3);
+}
+/*icons*/
+section div[class*="toolbar"] > div[class*="search"] > div[class*="search"] > div[class*="searchBar"] div[class*="icon"] > svg:nth-child(2) /*PRIMARY toolbar clear*/ {
+    transition: color var(--tr-normal-1);
+}
+/*channel name*/
+div[class*="channelName"] input[name="channel_name"][value] {
+    box-shadow: inset 0 0 1px transparent;
+    transition: var(--tr-normal-2);
+}
+div[class*="channelName"] input[name="channel_name"][value] ~ div {
+    visibility: visible !important;
+    transition: var(--tr-normal-1);
+}
+
+
+/*/ CONTEXT MENU, POPUP /*/
+    /* TR */
+/*labels*/
+div[class*="layerC"] div[role="menu"] div[role*="menuitem"]:not([id*="-roles-"]) > div[class*="label"] /*main*/,
+div[class*="layerC"] div[role="menu"] div[role*="menuitem"] > div[class*="label"] > div[class*="subtext"] /*main*/,
+div[class*="layerC"] div[role="menu"] div[role*="menuitem"] div[class*="label"] span /*roles*/,
+div[class*="layerC"] div[role="menu"] div[role*="menuitem"] svg > * /*icons*/ {
+    transition: color var(--tr-normal-2);
+}
+div[class*="layerC"] div[role="menu"] div[class*="focused"]:not([id*="-roles-"]) > div[class*="label"],
+div[class*="layerC"] div[role="menu"] div[class*="focused"] > div[class*="label"] > div[class*="subtext"],
+div[class*="layerC"] div[role="menu"] div[class*="focused"] div[class*="label"] span,
+div[class*="layerC"] div[role="menu"] div[role*="menuitem"]:hover svg > * {
+    transition: color var(--tr-normal-1);
+}
+/*bg*/
+div[class*="layerC"] div[role="menu"] div[role*="menuitem"] /*main*/,
+div[class*="layerC"] div[role="menu"] div[class*="customItem"][role*="menuitem"] > div,
+div[class*="layerC"] div > div[aria-label] > div > div[class*="rap"] /*Active Now*/ {
+    transition: background-color var(--tr-normal-2);
+}
+div[class*="layerC"] div[role="menu"] div[role*="menuitem"]:hover,
+div[class*="layerC"] div[role="menu"] div[class*="customItem"][role*="menuitem"]:hover > div,
+div[class*="layerC"] div > div[aria-label] > div > div[class*="rap"]:hover {
+    transition: background-color var(--tr-normal-1);
+}
+
+    /* SPAWN */
+@keyframes contextMenu-spawn-h {
+    0% { min-height: 20px; padding: 0 8px; }
+    100% { min-height: 32px; padding: 6px 8px; }
+}
+div[class*="layerC"] div[role="menu"] div[class*="item"][class*="labelContainer"][role*="menuitem"] /*main*/ {
+    animation: contextMenu-spawn-h 0.25s 1ms cubic-bezier(0.2, 0.6, 0, 1);
+}
+div[class*="layerC"] div[role="menu"] /*main*/,
+div[class*="layerC"] div[role="menu"] div[class*="submenu"] div[class*="layer"] /*submenu*/,
+div[class*="animator"] {
+    animation: opacity-fadein 0.3s var(--tr-smooth-1-t);
+}
+div[class*="layerC"] div[role="menu"] > div[class*="scroller"] /*main*/,
+div[class*="layerC"] div[role="menu"] div[class*="submenu"][role="menu"] div[class*="scroller"] /*submenu*/,
+div[class*="animator"] > div[role="menu"] > div[class*="scroller"] /*popout*/,
+div[class*="animator"] > div[class*="popout"][aria-label][role="dialog"] > div:not([class*="separator"]) /*Active Now*/ {
+    animation: opacity-fadein-delay5 0.6s var(--tr-smooth-1-t);
+}
+
+@keyframes toolbarPopout-spawn {
+    0% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+div[class*="layerC"] div[class*="recentMentions"],
+div[class*="layerC"] div[id="pinned-messages"],
+div[class*="layerC"] div[class*="layer"] > div[class*="modal"] {
+    animation: toolbarPopout-spawn var(--tr-quick-1),
+                opacity-fadein 0.3s var(--tr-smooth-1-t);
+}
+*[class*="translate"][class*="didRender"], *[class*="userPopout"] {
+    transition-duration: 0.6s !important;
+    transition-timing-function: var(--tr-quick-1-t) !important;
+}
+
+
+/*/ CHAT /*/
+div[class*="chat"] div[id*="messages-"] /*msg*/,
+div[class*="chat"] div[id*="messages-"] span[class*="timestampVisibleOnHover"] /*time*/ {
+    transition: var(--tr-normal-2);
+}
+
+/*/ EDITED /*/
+@keyframes chatMsgEdited-fadein {
+    0% { color: transparent; }
+    100% { color: var(--text-muted); }
+}
+div[id*="messages-"] div[class*="messageContent"] time[datetime][class*="edited"][role="note"][aria-label],
+div[id*="messages-"] div[class*="messageContent"] time[datetime][class*="edited"][role="note"][aria-label]::before {
+    margin-right: 0.15em;
+    content: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" style="color:rgba(114, 118, 125, 0.75);" width="11" height="11" viewBox="0 0 18 18"><g><path fill="currentColor" d="M0,14.25V18H3.75L14,7.75,10.26,4ZM17.71,4a1,1,0,0,0,0-1.41L15.37.29A1,1,0,0,0,14,.29L12.13,2.12l3.75,3.75Z"></path></g></svg>');
+}
+div[id*="messages-"] div[class*="messageContent"] time[datetime][class*="edited"][role="note"][aria-label] {
+    margin-left: 0.5em;
+}
+div[id*="messages-"] div[class*="messageContent"] time[datetime][class*="edited"][role="note"][aria-label]:hover {
+    content: initial;
+    animation: chatMsgEdited-fadein var(--tr-normal-1) 
+}
+
+/* SELECTED MSG */
+div[class*="chat"] div[id*="messages-"] div[class*="messageContent"] /*txt*/,
+div[class*="chat"] div[id*="messages-"] > div[class*="container"] > *:not([class*="reactions"]) /*embed*/ {
+    transition: var(--tr-normal-21);
+}
+
+div[class*="chat"] div[id*="messages-"] {
+    box-shadow: 0 0 0 0 var(--background-message-hover);
+}
+div[class*="chat"] div[id*="messages-"][class*="selected"] {
+    box-shadow: 0 0 0 4px var(--background-message-hover);
+}
+div[class*="chat"] div[id*="messages-"]:hover,
+div[class*="chat"] div[id*="messages-"][class*="selected"] {
+    transition: var(--tr-normal-1),
+                box-shadow 0.4s cubic-bezier(0.3, 0.6, 0, 3);
+}
+
+div[class*="chat"] div[id*="messages-"] div[class*="buttonC"] > div[class*="buttons"][aria-label] /*actions*/ {
+    transition: opacity var(--tr-normal-11) 0.1s,
+                transform var(--tr-quick-1) 0.1s;
+}
+div[class*="chat"] div[id*="messages-"]:hover div[class*="buttonC"] > div[class*="buttons"][aria-label] {
+    transition-delay: 0.1s !important;
+}
+
+    /* WHEN SELECTED EFFECTS */
+        /*tr*/
+div[class*="chat"] div[id*="messages-"] span[class*="timestampVisibleOnHover"] /*timestamp hour*/ {
+    transition: opacity var(--tr-normal-2),
+                transform var(--tr-quick-1) 0.1s;
+}
+        /*when selected pos*/
+div[class*="chat"] div[id*="messages-"]:hover div[class*="buttonC"] > div[class*="buttons"][aria-label] /*actions*/,
+div[class*="chat"] div[id*="messages-"][class*="selected"] div[class*="buttonC"] > div[class*="buttons"][aria-label],
+div[class*="chat"] div[id*="messages-"]:hover span[class*="timestampVisibleOnHover"] /*timestamp h*/,
+div[class*="chat"] div[id*="messages-"][class*="selected"] span[class*="timestampVisibleOnHover"] {
+    transition: opacity var(--tr-normal-1),
+                transform 0.5s var(--tr-quick-1-t);
+}
+        /*default pos*/
+div[class*="chat"] div[id*="messages-"]:hover div[class*="buttonC"] > div[class*="buttons"][aria-label],
+div[class*="chat"] div[id*="messages-"][class*="selected"] div[class*="buttonC"] > div[class*="buttons"][aria-label],
+div[class*="chat"] div[id*="messages-"] span[class*="timestampVisibleOnHover"] {
+    transform: translateY(0px) translateX(0px);
+}
+        /*effects*/
+div[class*="chat"] div[id*="messages-"] div[class*="buttonC"] > div[class*="buttons"][aria-label] {
+    transform: translateX(10px);
+}
+div[class*="chat"] div[id*="messages-"][class*="selected"] span[class*="timestampVisibleOnHover"] {
+    transform: translateX(-3px);
+    opacity: 0.7;
+    transition: var(--tr-normal-2),
+                margin var(--tr-quick-1);
+}
+
+        /* Sliding content to the side
+        Working way better than expected but works on too much cases
+        ("selected-*" class appears even when opening users cards)
+        So it's less appealing unfortunately
+        *//*
+div[class*="chat"] div[id*="messages-"][class*="selected"] div[class*="messageContent"],
+div[class*="chat"] div[id*="messages-"][class*="selected"] > div[class*="container"] > *:not([class*="reactions"]) {
+    transition: opacity var(--tr-normal-1),
+                transform var(--tr-quick-1);
+}
+div[class*="chat"] div[id*="messages-"][class*="selected"] div[class*="messageContent"],
+div[class*="chat"] div[id*="messages-"][class*="selected"] > div[class*="container"] > *:not([class*="reactions"]) {
+    transform: translateX(5px);
+}
+*/
+
+    /*/ BLOCKED MESSAGES /*/
+div[class*="chat"] div[id*="messages-"] div[class*="blockedSystemMessage"] {
+    width: fit-content;
+}
+
+/*/ LOGS /*/
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"] {
+    cursor: default;
+}
+
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"] div[class*="iconContainer"] {
+    transition: margin var(--tr-normal-2),
+                filter 0.4s ease;
+}
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="iconContainer"],
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] div[class*="iconContainer"] {
+    margin-right: 11px;
+    filter: contrast(1.75);
+    transition: margin var(--tr-normal-1),
+                filter 0.3s ease;
+}
+
+/*hover burple*/
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="channelNameChange"] > div[class*="content"] > strong,
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] div[class*="channelNameChange"] > div[class*="content"] > strong,
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover a[class*="anchorUnderlineOnHover"],
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] a[class*="anchorUnderlineOnHover"] {
+    color: var(--blurple-light);
+}
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="channelNameChange"] > div[class*="content"] > strong,
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] div[class*="channelNameChange"] > div[class*="content"] > strong {
+    letter-spacing: 0.5px;
+    word-spacing: 0.5px;
+}
+
+
+/*/ PROTIPS /*/
+div[class*="protip-"] {
+    filter: contrast(1);
+    transition: filter var(--tr-normal-1);
+}
+div[class*="protip-"]:hover {
+    filter: contrast(2);
+}
+
+
+
