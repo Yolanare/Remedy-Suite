@@ -4,4 +4,4 @@
 * Next, save [DiscordRemedy.theme.css](https://github.com/Yolanare/Remedy-Suite/blob/master/R-Discord/DiscordRemedy.theme.css).<br>
 *You need to **[Right Click]** on the "Raw" button, and select **[Save link as...]**.*
 * Put this file in the theme folder of BetterDiscord.<br>
-*Open Discord, go to "Settings" > "Themes" > "Open theme folder.*
+*Open Discord, go to "Settings" > "Themes" > "Open Theme folder at the top.*
