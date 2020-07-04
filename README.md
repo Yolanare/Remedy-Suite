@@ -16,8 +16,7 @@ I may in the future create an extension for browser to inject the CSS in the web
 * To inject CSS on a website: [Live editor for CSS, Less & Sass](https://github.com/webextensions/live-css-editor)<br>
 *Don't forget to click on the pin icon at the top right so it loads automatically at every start of the page*<br>
 * For Discord desktop app: [BetterDiscord](https://betterdiscord.net/home/)<br>
-*Put the file in the theme folder, go to "Settings">"Themes">"~Open folder" at the top*
-<br>
+*Put the file in the theme folder, go to "Settings" > "Themes" > "Open Theme folder" at the top*
 <br>
 
 ## What you can do
