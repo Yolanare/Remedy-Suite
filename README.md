@@ -24,6 +24,8 @@ I may in the future create an extension for browser to inject the CSS in the web
 I made a Google Sheet so I can stay organized, for you to check if something weird you found is broken or that has not been enhanced yet, and to see the progress of an idea you submitted.<br>
 You can access it by clicking on [this link](https://docs.google.com/spreadsheets/d/1LR8RfaxjRO9Ev-tWh12wy1si0-57OXMxzTpdTz63WPo/edit?usp=sharing).<br>
 *Every remedy is on a different sheet (look at the bottom of the page).*
+<br>
+<br>
 
 ## What you can do
 If you want to suggest any idea to improve any of the remedies, or if you found something not working:
