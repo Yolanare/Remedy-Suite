@@ -20,9 +20,12 @@ I may in the future create an extension for browser to inject the CSS in the web
 *Put the file in the theme folder, go to "Settings" > "Themes" > "Open Theme folder" at the top*
 <br>
 
+## Follow the progress of each remedy
+I made a Google Sheet so I can stay organized, for you to check if something weird you found is broken or that has not been enhanced yet, and to see the progress of an idea you submitted.<br>
+You can access it by clicking on [this link](https://docs.google.com/spreadsheets/d/1LR8RfaxjRO9Ev-tWh12wy1si0-57OXMxzTpdTz63WPo/edit?usp=sharing).<br>
+*Every remedy is on a different sheet (look at the bottom of the page).*
+
 ## What you can do
 If you want to suggest any idea to improve any of the remedies, or if you found something not working:
 * **[Reach me on Twitter](https://twitter.com/Yolanare)**
 * [Submit a request **on the Issues tab of the git**](https://github.com/Yolanare/Remedy-Suite/issues)
-
-<br>*I'll do for every remedy a big list with every effect of it, so if you find something disgusting, you can check if it's something that's broken or that has not been enhanced yet.*
