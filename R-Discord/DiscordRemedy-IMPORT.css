@@ -35,20 +35,25 @@
     5% { opacity: 0; }
     100% { opacity: 1; }
 }
+@keyframes opacity-fadein-delay12_5 {
+    0% { opacity: 0; }
+    12.5% { opacity: 0; }
+    100% { opacity: 1; }
+}
 
 /*/-- TRANSITIONS --/*/
-div[class*="container"] > section[class*="container"] div[class*="item"] /*toolbar tabs*/,
 div[class*="chat"] div[id*="messages-"] div[class*="blockedSystemMessage"] div[class*="blockedMessageText"] span /*blocked msg*/,
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"] div[class*="channelNameChange"] > div[class*="content"] > strong /*chat logs channel name change*/,
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"] a[class*="anchorUnderlineOnHover"] /*chat logs users*/,
+div[class*="container"] > section[class*="container"] div[class*="item"] /*toolbar tabs*/,
 div[id="app-mount"] div[class*="withFrame"][class*="titleBar"] div[class*="winButton"][aria-label][role="button"] /*frame buttons*/ {
     transition: var(--tr-normal-2);
 }
-div[class*="container"] > section[class*="container"] div[class*="item"],
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover /*home active now*/,
 div[class*="chat"] div[id*="messages-"] div[class*="blockedSystemMessage"] div[class*="blockedMessageText"] span:hover,
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover a[class*="anchorUnderlineOnHover"],
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="channelNameChange"] > div[class*="content"] > strong,
-div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover a[class*="anchorUnderlineOnHover"] {
+div[class*="container"] > section[class*="container"] div[class*="item"],
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover /*home active now*/ {
     transition: var(--tr-normal-1);
 }
 
@@ -133,7 +138,7 @@ div[class*="animator"] > div[class*="popout"][aria-label][role="dialog"] > div:n
 }
 
 @keyframes toolbarPopout-spawn {
-    0% { transform: translateY(-20px); }
+    0% { transform: translateY(20px); }
     100% { transform: translateY(0px); }
 }
 div[class*="layerC"] div[class*="recentMentions"],
@@ -142,7 +147,7 @@ div[class*="layerC"] div[class*="layer"] > div[class*="modal"] {
     animation: toolbarPopout-spawn var(--tr-quick-1),
                 opacity-fadein 0.3s var(--tr-smooth-1-t);
 }
-*[class*="translate"][class*="didRender"], *[class*="userPopout"] {
+*[class*="translate"][class*="didRender"], *[class*="userPopout"] /*user card*/ {
     transition-duration: 0.6s !important;
     transition-timing-function: var(--tr-quick-1-t) !important;
 }
@@ -447,10 +452,36 @@ background-position-y: center;
 /*/ HOME - FRIENDS ACTIVITY (ACTIVE NOW) */
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] {
     transition: var(--tr-normal-21);
-    }
-    div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover {
-    transition: var(--tr-normal-1);
-    }
+}
+/* SPAWN */
+@keyframes activeNowCards-spawn-normal {
+    0% { padding: 0 16px; margin-top: 0px; }
+    100% { padding: 16px 16px; margin-top: 8px; }
+}
+@keyframes activeNowCards-spawn-first {
+    0% { padding: 0 16px; }
+    100% { padding: 16px 16px; }
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:not(:nth-of-type(1)) {
+    animation: activeNowCards-spawn-normal 0.4s cubic-bezier(0.2, 0.7, 0, 1),
+                opacity-fadein 0.4s var(--tr-smooth-1-t);
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:nth-of-type(1) {
+    animation: activeNowCards-spawn-first 0.35s cubic-bezier(0.2, 0.6, 0, 1),
+                opacity-fadein 0.4s var(--tr-smooth-1-t);
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] > div {
+    animation: opacity-fadein-delay12_5 0.6s var(--tr-smooth-1-t);
+}
+
+/* ICON */
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] header *[class*="headerIcon"] {
+    transition: transform var(--tr-normal-2);
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover header *[class*="headerIcon"] {
+    transform: scale(1.15);
+    transition: transform 0.2s var(--tr-quick-1-t)
+}
 
 
 /*/- TERTIARY -/*/
