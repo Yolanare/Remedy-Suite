@@ -5,3 +5,7 @@
 *You need to **[Right Click]** on the "Raw" button, and select **[Save Link As...]**.*
 * Put this file in the theme folder of BetterDiscord.<br>
 *Open Discord, go to "Settings" > "Themes" > "Open Theme folder" at the top.*
+<br>
+
+## See the progress
+I've made a Google Sheet which you can acces by [this link](https://docs.google.com/spreadsheets/d/1LR8RfaxjRO9Ev-tWh12wy1si0-57OXMxzTpdTz63WPo/edit?usp=sharing)!
