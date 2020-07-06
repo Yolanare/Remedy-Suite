@@ -38,15 +38,26 @@
 
 /*/ TRANSITIONS /*/
 div[class*="container"] > section[class*="container"] div[class*="item"] /*toolbar tabs*/,
+div[class*="chat"] div[id*="messages-"] div[class*="blockedSystemMessage"] div[class*="blockedMessageText"] span /*blocked msg*/,
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"] div[class*="channelNameChange"] > div[class*="content"] > strong /*chat logs channel name change*/,
-div[class*="chat"] div[id*="messages-"][class*="systemMessage"] a[class*="anchorUnderlineOnHover"] /*chat logs users*/ {
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"] a[class*="anchorUnderlineOnHover"] /*chat logs users*/,
+div[id="app-mount"] div[class*="withFrame"][class*="titleBar"] div[class*="winButton"][aria-label][role="button"] /*frame buttons*/ {
     transition: var(--tr-normal-2);
 }
 div[class*="container"] > section[class*="container"] div[class*="item"],
-div[class*="chat"] div[id*="messages"] div[class*="blockedSystemMessage"] span[class*="blockedAction"] /*blocked msg*/,
+div[class*="chat"] div[id*="messages-"] div[class*="blockedSystemMessage"] div[class*="blockedMessageText"] span:hover,
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="channelNameChange"] > div[class*="content"] > strong,
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover a[class*="anchorUnderlineOnHover"] {
     transition: var(--tr-normal-1);
+}
+
+/*hover burple*/
+div[class*="chat"] div[id*="messages-"] div[class*="blockedSystemMessage"] div[class*="blockedMessageText"] span:hover /*blocked msg*/,
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="channelNameChange"] > div[class*="content"] > strong /*logs*/,
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] div[class*="channelNameChange"] > div[class*="content"] > strong,
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover a[class*="anchorUnderlineOnHover"],
+div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] a[class*="anchorUnderlineOnHover"] {
+    color: var(--blurple-light) !important;
 }
 
 
@@ -145,7 +156,7 @@ div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[c
 
 
     /* PRIMARY */
-        /* BIG PEOPLE LIST --background-modifier-hover*/
+        /* BIG PEOPLE LIST*/
 /*box*/
 div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"] {
     border-radius: 8px;
@@ -165,7 +176,9 @@ div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"]:
     transition: background-color var(--tr-normal-1) !important;
 }
 div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"]:hover > div[class*="listItemContents"],
-div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"]:hover + div[class*="peopleListItem"] > div[class*="listItemContents"] {
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"]:hover + div[class*="peopleListItem"] > div[class*="listItemContents"],
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"][class*="active"] > div[class*="listItemContents"],
+div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"][class*="active"] + div[class*="peopleListItem"] > div[class*="listItemContents"] {
     border-top-color: transparent;
     transition: var(--tr-normal-1);
 }
@@ -209,7 +222,7 @@ transition: var(--tr-normal-1);
 }
 
 
-/*/ SEARCHBARS /*/
+/*/ INPUT BARS (Search bars, Channel name) /*/
 /*box*/
 div[class*="sidebar"] > nav > div[class*="searchBar"] > button /*HOME find conv*/,
 div[class*="searchBarComponent"],
@@ -328,10 +341,10 @@ div[id*="messages-"] div[class*="messageContent"] time[datetime][class*="edited"
     animation: chatMsgEdited-fadein var(--tr-normal-1) 
 }
 
-/* SELECTED MSG */
+/*/ SELECTED /*/
 div[class*="chat"] div[id*="messages-"] div[class*="messageContent"] /*txt*/,
 div[class*="chat"] div[id*="messages-"] > div[class*="container"] > *:not([class*="reactions"]) /*embed*/ {
-    transition: var(--tr-normal-21);
+    transition: var(--tr-normal-2);
 }
 
 div[class*="chat"] div[id*="messages-"] {
@@ -342,7 +355,7 @@ div[class*="chat"] div[id*="messages-"][class*="selected"] {
 }
 div[class*="chat"] div[id*="messages-"]:hover,
 div[class*="chat"] div[id*="messages-"][class*="selected"] {
-    transition: var(--tr-normal-1),
+    transition: var(--tr-normal-11),
                 box-shadow 0.4s cubic-bezier(0.3, 0.6, 0, 3);
 }
 
@@ -360,15 +373,15 @@ div[class*="chat"] div[id*="messages-"] span[class*="timestampVisibleOnHover"] /
     transition: opacity var(--tr-normal-2),
                 transform var(--tr-quick-1) 0.1s;
 }
-        /*when selected pos*/
+        /*when selected step*/
 div[class*="chat"] div[id*="messages-"]:hover div[class*="buttonC"] > div[class*="buttons"][aria-label] /*actions*/,
 div[class*="chat"] div[id*="messages-"][class*="selected"] div[class*="buttonC"] > div[class*="buttons"][aria-label],
 div[class*="chat"] div[id*="messages-"]:hover span[class*="timestampVisibleOnHover"] /*timestamp h*/,
 div[class*="chat"] div[id*="messages-"][class*="selected"] span[class*="timestampVisibleOnHover"] {
-    transition: opacity var(--tr-normal-1),
+    transition: opacity var(--tr-normal-11),
                 transform 0.5s var(--tr-quick-1-t);
 }
-        /*default pos*/
+        /*default step*/
 div[class*="chat"] div[id*="messages-"]:hover div[class*="buttonC"] > div[class*="buttons"][aria-label],
 div[class*="chat"] div[id*="messages-"][class*="selected"] div[class*="buttonC"] > div[class*="buttons"][aria-label],
 div[class*="chat"] div[id*="messages-"] span[class*="timestampVisibleOnHover"] {
@@ -384,7 +397,6 @@ div[class*="chat"] div[id*="messages-"][class*="selected"] span[class*="timestam
     transition: var(--tr-normal-2),
                 margin var(--tr-quick-1);
 }
-
         /* Sliding content to the side
         Working way better than expected but works on too much cases
         ("selected-*" class appears even when opening users cards)
@@ -401,9 +413,12 @@ div[class*="chat"] div[id*="messages-"][class*="selected"] > div[class*="contain
 }
 */
 
-    /*/ BLOCKED MESSAGES /*/
+/*/ BLOCKED MESSAGES /*/
 div[class*="chat"] div[id*="messages-"] div[class*="blockedSystemMessage"] {
     width: fit-content;
+}
+div[class*="chat"] div[id*="messages-"] div[class*="blockedSystemMessage"]:hover div[class*="blockedMessageText"] span {
+    color: var(--text-muted);
 }
 
 /*/ LOGS /*/
@@ -423,13 +438,6 @@ div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected
                 filter 0.3s ease;
 }
 
-/*hover burple*/
-div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="channelNameChange"] > div[class*="content"] > strong,
-div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] div[class*="channelNameChange"] > div[class*="content"] > strong,
-div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover a[class*="anchorUnderlineOnHover"],
-div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] a[class*="anchorUnderlineOnHover"] {
-    color: var(--blurple-light);
-}
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="channelNameChange"] > div[class*="content"] > strong,
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] div[class*="channelNameChange"] > div[class*="content"] > strong {
     letter-spacing: 0.5px;
@@ -446,5 +454,30 @@ div[class*="protip-"]:hover {
     filter: contrast(2);
 }
 
+/*/ TITLE BAR /*/
+/* TITLE */
+div[id="app-mount"] div[class*="withFrame"][class*="titleBar"] div[class*="wordmark"] {
+    pointer-events: auto;
+    -webkit-app-region: no-drag;
+}
+div[id="app-mount"] div[class*="withFrame"][class*="titleBar"] div[class*="wordmark"]::after {
+    position: absolute;
+    left: 55px;
+    padding: 0 9px;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.7s var(--tr-smooth-1-t),
+                transform 0.8s cubic-bezier(0.6, 0.1, 0, 1);
+    content: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" style="color:rgb(114, 118, 125);" width="53" height="16" viewBox="0 0 53 10"><g><path fill="currentColor" d="M4.9,4.7H3.5l0.4-2.2h1.4C6.8,2.5,6.4,4.7,4.9,4.7z M8.6,3.4c0.4-2.3-1-3.2-2.9-3.2H1.9L0,9.9h2.4L3,6.8h0.4l1.6,3.1h3 l-2-3.3C7.4,6.2,8.3,5.2,8.6,3.4z M13.1,2.6l-0.3,1.4h2.8l-0.4,2.2h-2.8l-0.3,1.4h3.4l-0.5,2.4H9l1.9-9.7h6l-0.5,2.4H13.1z M28.5,0.1l-1.9,9.8h-2.6l0.7-3.8l-3.2,3.6h0l-1.6-3.5l-0.7,3.7h-2.6l1.9-9.8h1.2l2.6,5.6l4.9-5.6H28.5z M32.3,2.6l-0.3,1.4h2.8 l-0.4,2.2h-2.8l-0.3,1.4h3.4l-0.5,2.4h-6l1.9-9.7h6l-0.5,2.4H32.3z M41.1,0.2h-3.6l-0.8,4.1l2,2.2l0.8-4h1.3c0.8,0,1.1,0.4,1,1 l-0.6,3c-0.1,0.6-0.6,1.1-1.4,1.1h-3.7l-0.4,2.3h3.6c1.9,0,3.9-1,4.3-3.2l0.6-3.3C44.7,1.2,43.1,0.2,41.1,0.2z M46.5,5.9l-1.7-5.7 h2.8l0.6,3l1.7-3H53l-3.9,5.7l-0.8,4h-2.6L46.5,5.9z"></path></g></svg>');
+}
+div[id="app-mount"] div[class*="withFrame"][class*="titleBar"] div[class*="wordmark"]:hover::after {
+    opacity: 0.75;
+    transform: translateX(0px);
+    transition: opacity 0.3s var(--tr-smooth-1-t) 75ms,
+                transform 0.5s var(--tr-quick-1-t);
+}
 
-
+/* CONTROLS */
+div[id="app-mount"] div[class*="withFrame"][class*="titleBar"] div[class*="winButton"][aria-label][role="button"]:hover {
+    transition: var(--tr-normal-111);
+}
