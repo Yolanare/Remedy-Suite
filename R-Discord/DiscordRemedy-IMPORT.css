@@ -35,9 +35,9 @@
     5% { opacity: 0; }
     100% { opacity: 1; }
 }
-@keyframes opacity-fadein-delay12_5 {
+@keyframes opacity-fadein-delay15 {
     0% { opacity: 0; }
-    12.5% { opacity: 0; }
+    15% { opacity: 0; }
     100% { opacity: 1; }
 }
 
@@ -220,8 +220,7 @@ div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"] 
 }
 
 /*/ CHAT MESSAGES /*/
-div[class*="chat"] div[id*="messages-"] /*msg*/,
-div[class*="chat"] div[id*="messages-"] span[class*="timestampVisibleOnHover"] /*time*/ {
+div[class*="chat"] div[id*="messages-"] /*msg*/ {
     transition: var(--tr-normal-2);
 }
 
@@ -271,33 +270,37 @@ div[class*="chat"] div[id*="messages-"]:hover div[class*="buttonC"] > div[class*
 
 /* CHAT MSG WHEN SELECTED EFFECTS */
 /*tr*/
-div[class*="chat"] div[id*="messages-"] span[class*="timestampVisibleOnHover"] /*timestamp hour*/ {
+div[class*="chat"] div[id*="messages-"] span[class*="timestamp"]:not(:nth-child(2)) /*timestamp hour*/ {
     transition: opacity var(--tr-normal-2),
                 transform var(--tr-quick-1) 0.1s;
 }
 /*when selected step*/
 div[class*="chat"] div[id*="messages-"]:hover div[class*="buttonC"] > div[class*="buttons"][aria-label] /*actions*/,
-div[class*="chat"] div[id*="messages-"][class*="selected"] div[class*="buttonC"] > div[class*="buttons"][aria-label],
-div[class*="chat"] div[id*="messages-"]:hover span[class*="timestampVisibleOnHover"] /*timestamp h*/,
-div[class*="chat"] div[id*="messages-"][class*="selected"] span[class*="timestampVisibleOnHover"] {
+div[class*="chat"] div[id*="messages-"][class*="selected"] div[class*="buttonC"] > div[class*="buttons"][aria-label] {
+    transition: opacity var(--tr-normal-11),
+                transform 0.5s var(--tr-quick-1-t);
+}
+div[class*="chat"] div[id*="messages-"]:hover span[class*="timestamp"]:not(:nth-child(2)),
+div[class*="chat"] div[id*="messages-"][class*="selected"] span[class*="timestamp"]:not(:nth-child(2)) {
     transition: opacity var(--tr-normal-11),
                 transform 0.5s var(--tr-quick-1-t);
 }
 /*default step*/
 div[class*="chat"] div[id*="messages-"]:hover div[class*="buttonC"] > div[class*="buttons"][aria-label],
 div[class*="chat"] div[id*="messages-"][class*="selected"] div[class*="buttonC"] > div[class*="buttons"][aria-label],
-div[class*="chat"] div[id*="messages-"] span[class*="timestampVisibleOnHover"] {
+div[class*="chat"] div[id*="messages-"] span[class*="timestamp"]:not(:nth-child(2)) {
     transform: translateY(0px) translateX(0px);
 }
 /*effects*/
 div[class*="chat"] div[id*="messages-"] div[class*="buttonC"] > div[class*="buttons"][aria-label] {
     transform: translateX(10px);
 }
-div[class*="chat"] div[id*="messages-"][class*="selected"] span[class*="timestampVisibleOnHover"] {
+div[class*="chat"] div[id*="messages-"][class*="selected"] span[class*="timestamp"]:not(:nth-child(2)) {
     transform: translateX(-3px);
     opacity: 0.7;
     transition: var(--tr-normal-2),
-                margin var(--tr-quick-1);
+                margin var(--tr-quick-1),
+                transform 0.5s var(--tr-quick-1-t);
 }
         /* Sliding content to the side
         Working way better than expected but works on too much cases
@@ -455,23 +458,25 @@ div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] {
 }
 /* SPAWN */
 @keyframes activeNowCards-spawn-normal {
-    0% { padding: 0 16px; margin-top: 0px; }
-    100% { padding: 16px 16px; margin-top: 8px; }
+    0% { padding: 0 16px; max-height: 0; margin-top: 0px; }
+    20% { padding: 0 16px; max-height: 0; margin-top: 0px; }
+    100% { padding: 16px 16px; max-height: 999px; margin-top: 8px; }
 }
 @keyframes activeNowCards-spawn-first {
-    0% { padding: 0 16px; }
-    100% { padding: 16px 16px; }
+    0% { padding: 0 16px; max-height: 0; }
+    20% { padding: 0 16px; max-height: 0; }
+    100% { padding: 16px 16px; max-height: 999px; }
 }
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:not(:nth-of-type(1)) {
-    animation: activeNowCards-spawn-normal 0.4s cubic-bezier(0.2, 0.7, 0, 1),
-                opacity-fadein 0.4s var(--tr-smooth-1-t);
+    animation: activeNowCards-spawn-normal 0.5s cubic-bezier(0.2, 0.7, 0, 1),
+                opacity-fadein 0.5s var(--tr-smooth-1-t);
 }
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:nth-of-type(1) {
-    animation: activeNowCards-spawn-first 0.35s cubic-bezier(0.2, 0.6, 0, 1),
-                opacity-fadein 0.4s var(--tr-smooth-1-t);
+    animation: activeNowCards-spawn-first 0.5s cubic-bezier(0.2, 0.6, 0, 1),
+                opacity-fadein 0.5s var(--tr-smooth-1-t);
 }
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] > div {
-    animation: opacity-fadein-delay12_5 0.6s var(--tr-smooth-1-t);
+    animation: opacity-fadein-delay15 0.7s var(--tr-smooth-1-t);
 }
 
 /* ICON */
@@ -497,7 +502,7 @@ div[id="app-mount"] div[class*="withFrame"][class*="titleBar"] div[class*="wordm
     padding: 0 9px;
     opacity: 0;
     transform: translateX(-30px);
-    transition: opacity 0.6s var(--tr-smooth-1-t) 50ms,
+    transition: opacity 0.45s var(--tr-smooth-2-t) 50ms,
                 transform 0.8s cubic-bezier(0.6, 0.1, 0, 1);
     content: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" style="color:rgb(114, 118, 125);" width="53" height="16" viewBox="0 0 53 10"><g><path fill="currentColor" d="M4.9,4.7H3.5l0.4-2.2h1.4C6.8,2.5,6.4,4.7,4.9,4.7z M8.6,3.4c0.4-2.3-1-3.2-2.9-3.2H1.9L0,9.9h2.4L3,6.8h0.4l1.6,3.1h3 l-2-3.3C7.4,6.2,8.3,5.2,8.6,3.4z M13.1,2.6l-0.3,1.4h2.8l-0.4,2.2h-2.8l-0.3,1.4h3.4l-0.5,2.4H9l1.9-9.7h6l-0.5,2.4H13.1z M28.5,0.1l-1.9,9.8h-2.6l0.7-3.8l-3.2,3.6h0l-1.6-3.5l-0.7,3.7h-2.6l1.9-9.8h1.2l2.6,5.6l4.9-5.6H28.5z M32.3,2.6l-0.3,1.4h2.8 l-0.4,2.2h-2.8l-0.3,1.4h3.4l-0.5,2.4h-6l1.9-9.7h6l-0.5,2.4H32.3z M41.1,0.2h-3.6l-0.8,4.1l2,2.2l0.8-4h1.3c0.8,0,1.1,0.4,1,1 l-0.6,3c-0.1,0.6-0.6,1.1-1.4,1.1h-3.7l-0.4,2.3h3.6c1.9,0,3.9-1,4.3-3.2l0.6-3.3C44.7,1.2,43.1,0.2,41.1,0.2z M46.5,5.9l-1.7-5.7 h2.8l0.6,3l1.7-3H53l-3.9,5.7l-0.8,4h-2.6L46.5,5.9z"></path></g></svg>');
 }
