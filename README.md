@@ -1,15 +1,22 @@
 # Project
-<strong>Remedy</strong> is a project to improve the user experience of a service with a simple CSS injection (and maybe JS in the future as well).
+<strong>Remedy</strong> is a project to improve the user experience of a service with a simple CSS injection *(and maybe JS in the future as well)*.<br>
+The goal is to do something that respects the visual identity of these services, while making sure that the CSS can sustain any eventual User Interface (UI) changes and continue working *like it ain't nothin'*.
 
-The goal is to do something that respects the visual identity of these services, while making sure that the CSS can sustain any eventual interface changes and continue working *like it ain't nothin'*.
+With CSS, there are many ways of doing this, especially with attribute selectors <i>(the day I knew these existed just turned my world upside down)</i>.
 
-With CSS, there are many ways of doing this, especially with attribute selectors <i>(The day I knew this existed just turned my world upside down)</i>.
-
-## I'll call the thing "Remedy Suite". *Sounds cool nah?*<br>
-On this git, you have access to all the remedies separated in folders. Once you've downloaded one, you wont need to download it a new time to update it, they will automatically be since i'll link them to the world wide web.
+## I'll call the thing "Remedy Suite". *Sounds cool nah?*
+On this git, you have access to all the remedies separated in folders. Once you've downloaded one, you wont need to download it a new time to update it, they will automatically be since i'll link them to the world wide web.<br>
+<br>
 
 # My plans
 I'll start working on Discord, next after widely finishing it I'll do Twitter <i>(I really hate how they made their interface, I'll put back the centered timeline)</i>. For the third one i thought about YouTube, why not. I'll see in the future for more services, i don't need to plan everything from the beginning since i don't even know if I'll be able to handle these three alone.
+
+## Little Disclaimer
+As I work on the remedies, I'm just going to assume that the people who are looking for this kind of strange customization are not complete computer newbies, and therefore don't have a toaster as a computer. Which means that I don't take small PCs that much into account. This doesn't mean that I skip optimization and performance, but with enhancement comes cost. These services on their own are already **optimized** for all computers, no matter how low-powered they may be *(normally)*. And that's precisely why in some cases it may look quite cheap, but it's in fact sacrifices that the designers had to make because some of you are wandering around on the web with toasters.
+
+*This is mainly the reason why I want to remain faithful to the original UI, to push it to its peak.*<br>
+*When developing them, I put myself inside the shoes of the real guy who made the interface (or there are more than one designer and I have schizophrenia), and I try my best to adapt what I do according to the user's needs and the aesthetic of the UI.*<br>
+<br>
 
 # How
 I may in the future create an extension for browser to inject the CSS in the websites, but for the moment since I'm not focusing on that, I'll recommand some that do the job perfectly.
