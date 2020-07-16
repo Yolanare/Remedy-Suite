@@ -465,7 +465,8 @@ div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="memb
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"] > div[class*="layout"] div[class*="nameAndDecorators"] span[class^="botTag"] {
     opacity: 0.85;
 }
-div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"]:hover > div[class*="layout"] div[class*="nameAndDecorators"] span[class^="botTag"] {
+div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"]:hover > div[class*="layout"] div[class*="nameAndDecorators"] span[class^="botTag"],
+div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"][class*="selected"] > div[class*="layout"] div[class*="nameAndDecorators"] span[class^="botTag"] {
     opacity: 1;
 }
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"]:hover > div[class*="layout"] div[class*="nameAndDecorators"] svg[class^="botTag"] {
