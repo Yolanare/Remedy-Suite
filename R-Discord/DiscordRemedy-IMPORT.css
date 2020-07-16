@@ -474,14 +474,24 @@ div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="memb
 }
 
 /* (DM) CLOSE BUTTON */
+div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="content"] {
+    max-width: calc(164px - 0px) !important;
+    width: 164px !important; /*original size*/
+}
+div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="content"],
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="content"] {
+    max-width: calc(164px - 25px) !important;
+}
+div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="children"] {
+    position: absolute;
+    right: 8px; /*padding*/
+}
+
 div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="children"] > div {
     display: block;
     transform: translateX(50px);
-    transition: opacity 50ms var(--tr-normal-2),
-                transform 1.35s var(--tr-quick-2-t);
     pointer-events: none;
 }
-
 div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] > div /*hover*/,
 div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="children"] > div /*selected*/ {
     display: block;
@@ -489,13 +499,24 @@ div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[c
     transform: translateX(0px);
     pointer-events: all;
 }
-div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] > div {
-    transition: opacity var(--tr-normal-2),
-                transform 0.5s 0.4s var(--tr-quick-1-t);
+
+div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="children"] > div,
+div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="content"] {
+    transition: opacity 50ms var(--tr-normal-2),
+                transform 1.35s var(--tr-quick-2-t),
+                max-width 0.5s ease;
 }
-div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="children"] > div {
+div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] > div,
+div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="content"] {
     transition: opacity var(--tr-normal-2),
-                transform 0.5s var(--tr-quick-1-t);
+                transform 0.5s 0.4s var(--tr-quick-1-t),
+                max-width 0.3s 0.4s ease;
+}
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="children"] > div,
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="content"] {
+    transition: opacity var(--tr-normal-2),
+                transform 0.5s var(--tr-quick-1-t),
+                max-width 0.4s ease;
 }
 div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] > div:hover,
 div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"]:hover div[class*="children"] > div:hover {
