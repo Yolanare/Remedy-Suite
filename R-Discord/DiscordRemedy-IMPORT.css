@@ -80,6 +80,9 @@ div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"] /*member's name in members list*/,
 div[class*="chat"] div[class*="message-"] h2 /*member's name in chat*/ {
     transform: rotateX(0.0001deg);
+}
+div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"],
+div[class*="chat"] div[class*="message-"] h2 span[class*="username"] /*member's name in chat more specifically*/ {
     text-shadow: 0 0 0 currentColor; /*because AAF renders thinner letters, and somehow they're back to normal with this effect*/
 }
 
