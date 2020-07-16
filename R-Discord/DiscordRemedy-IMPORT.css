@@ -75,6 +75,13 @@ div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected
     color: var(--blurple) !important;
 }
 
+/*/-- ANTI-ALIASING FORCING --/*/
+/*bc otherwise we get a weird glitch effect*/
+div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"] /*member's name in members list*/,
+div[class*="chat"] div[class*="message-"] h2 /*member's name in chat*/ {
+    transform: rotateX(0.0001deg);
+    text-shadow: 0 0 0 currentColor; /*because AAF renders thinner letters, and somehow they're back to normal with this effect*/
+}
 
 /*/- MISCELLANEOUS -/*/
 /*/ SEARCH BARS /*/
@@ -299,6 +306,16 @@ div[class*="chat"] div[id*="messages-"][class*="selected"][class*="mentioned"]::
     box-shadow: -4px 0 0 4px #faa61a;
 }
 
+@keyframes msgActionsCreationAniFix {                /*Buttons are created only when hovering msg for the first time*/
+    0% { opacity: 0; transform: translateX(10px); }  /*so this means that they're all set at "opacity:1;" by default*/
+    75% { opacity: 0; transform: translateX(10px); } /*and since we do transitions, when we hover multiple messages quickly*/
+    100% { opacity: 1; transform: translateX(0px); } /*they do not fade in (they don't have the time since they need to go from 1 to 0 first)*/
+}                                                    /*but they only fade out, and we want the fade in*/
+div[class*="chat"] div[id*="messages-"] div[class*="buttonC"] {
+    opacity: 0;
+    animation: msgActionsCreationAniFix 0.5s forwards;
+}
+
 div[class*="chat"] div[id*="messages-"] div[class*="buttonC"] > div[class*="buttons"][aria-label] /*actions*/ {
     transition: opacity var(--tr-normal-11) 0.1s,
                 transform var(--tr-quick-1) 0.1s;
@@ -449,7 +466,6 @@ div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] > div
 
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"] {
     cursor: pointer;
-    transform: rotateX(0.0001deg); /*forcing Anti-Aliasing bc otherwise we get a weird glitch effect*/
 }
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"][class*="offline"]:not([class*="selected"]):hover {
     opacity: 0.75;
@@ -504,7 +520,7 @@ div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="children"] >
 div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="content"] {
     transition: opacity 50ms var(--tr-normal-2),
                 transform 1.35s var(--tr-quick-2-t),
-                max-width 0.5s ease;
+                max-width 0.35s ease;
 }
 div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] > div,
 div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="content"] {
@@ -583,10 +599,10 @@ div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] > div {
 }
 
 /* ICON */
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] header *[class*="headerIcon"] {
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] header > *:not(:nth-child(2)):nth-last-child(1) /*trying someting for "playing multiple games" icon (yep that exists)*/ /**[class*="headerIcon"]*/ {
     transition: transform var(--tr-normal-2);
 }
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover header *[class*="headerIcon"] {
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover header > *:not(:nth-child(2)):nth-last-child(1) {
     transform: scale(1.1);
     transition: transform 0.2s var(--tr-quick-1-t)
 }
