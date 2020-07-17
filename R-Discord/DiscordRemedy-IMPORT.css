@@ -50,6 +50,8 @@ div[class*="container"] > section[class*="container"] div[class*="item"] /*toolb
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"] > div[class*="layout"] div[class*="nameAndDecorators"] svg:not([class^="botTag"]) /*members list server/group owner icon*/,
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"] > div[class*="layout"] div[class*="nameAndDecorators"] span[class^="botTag"] /*members verified bots box*/,
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"] > div[class*="layout"] div[class*="nameAndDecorators"] svg[class^="botTag"] /*members verified bots icon*/,
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section /*home active now section*/,
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div:nth-child(2) /*home active now text*/,
 div[id="app-mount"] div[class*="withFrame"][class*="titleBar"] div[class*="winButton"][aria-label][role="button"] /*frame buttons*/ {
     transition: var(--tr-normal-2);
 }
@@ -59,7 +61,9 @@ div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*
 div[class*="container"] > section[class*="container"] div[class*="item"],
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"]:hover > div[class*="layout"] div[class*="nameAndDecorators"] svg:not([class^="botTag"]),
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"]:hover > div[class*="layout"] div[class*="nameAndDecorators"] span[class^="botTag"],
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover /*home active now*/ {
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover /*home active now*/,
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section,
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover > div div:nth-child(2) {
     transition: var(--tr-normal-1);
 }
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"]:hover > div[class*="layout"] div[class*="nameAndDecorators"] svg[class^="botTag"] {
@@ -110,6 +114,10 @@ section div[class*="toolbar"] > div[class*="search"] > div[class*="search"] > di
 }
 
 /*/ CONTEXT MENU, POPOUTS /*/
+div[class*="layerC"] div[role="menu"] div[role="group"]:nth-child(1) > div[class*="customItem"][role*="menuitem"] {
+    border-radius: 50%;
+}
+
 /* TR */
 /*labels*/
 div[class*="layerC"] div[role="menu"] div[role*="menuitem"]:not([id*="-roles-"]) > div[class*="label"] /*main*/,
@@ -161,15 +169,22 @@ div[class*="animator"] > div[class*="popout"][aria-label][role="dialog"] > div:n
     100% { transform: translateY(0px); }
 }
 div[class*="layerC"] div[class*="recentMentions"],
-div[class*="layerC"] div[id="pinned-messages"],
-div[class*="layerC"] div[class*="layer"] > div[class*="modal"] {
+div[class*="layerC"] div[id*="popout"] > div[role*="list"] > div,
+div[class*="layerC"] div[id*="popout"] > div[role*="dialog"] > div {
     animation: toolbarPopout-spawn var(--tr-quick-1),
                 opacity-fadein 0.3s var(--tr-smooth-1-t);
 }
+
 *[class*="translate"][class*="didRender"], *[class*="userPopout"] /*user card*/ {
     transition-duration: 0.6s !important;
     transition-timing-function: var(--tr-quick-1-t) !important;
 }
+
+/*old user cards spawn*/
+div[class*="popouts"] > div[class*="noArrow"][class*="popout"] {
+    animation: opacity-fadein 0.2s var(--tr-smooth-1-t);
+}
+
 
 /*/ PROTIPS /*/
 div[class*="protip-"] > h3[class*="pro-"],
@@ -222,7 +237,7 @@ div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"][
 /*discordtag*/
 div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"] div[class*="discordTag"] > span[class*="username"],
 div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"] div[class*="subtext"] {
-    opacity: 0.75;
+    opacity: 0.8;
     transition: opacity var(--tr-normal-2);
 }
 div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"]:hover div[class*="discordTag"] > span[class*="username"],
@@ -578,7 +593,7 @@ background-position-y: center;
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] {
     transition: var(--tr-normal-21);
 }
-/* SPAWN */
+/* APPARITION */
 @keyframes activeNowCards-spawn-normal {
     0% { padding: 0 16px; max-height: 0; margin-top: 0px; }
     20% { padding: 0 16px; max-height: 0; margin-top: 0px; }
@@ -603,11 +618,48 @@ div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] > div {
 
 /* ICON */
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] header > *:not(:nth-child(2)):nth-last-child(1) /*trying someting for "playing multiple games" icon (yep that exists)*/ /**[class*="headerIcon"]*/ {
-    transition: transform var(--tr-normal-2);
+    transition: transform var(--tr-normal-2) 50ms;
 }
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover header > *:not(:nth-child(2)):nth-last-child(1) {
-    transform: scale(1.1);
-    transition: transform 0.2s var(--tr-quick-1-t)
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover header > *:not(:nth-child(2)):nth-last-child(1),
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"][class*=" active"] header > *:not(:nth-child(2)):nth-last-child(1) {
+    transform: scale(1.125);
+    transition: transform 0.2s var(--tr-quick-1-t);
+}
+
+/* SECTIONS HOVER */
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div[class*="partyMembers"] > div {
+    transition: var(--tr-normal-2);
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover > div div[class*="partyMembers"] > div {
+    transform: scale(1.11);
+    transition: 0.25s cubic-bezier(0.1, 0.65, 0, 2.5);
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div[class*="partyMembers"] > div:nth-child(1) {
+    transition-delay: calc(65ms*0); /*if only there was a way to do loops...*/
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div[class*="partyMembers"] > div:nth-child(2) {
+    transition-delay: calc(65ms*1);
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div[class*="partyMembers"] > div:nth-child(3) {
+    transition-delay: calc(65ms*2);
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div[class*="partyMembers"] > div:nth-child(4) {
+    transition-delay: calc(65ms*3);
+}
+
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div:nth-child(2) {
+    opacity: 0.9;
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover > div div:nth-child(2) {
+    opacity: 1;
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover {
+    background-color: var(--background-modifier-hover);
+}
+
+/*underline*/
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div[class*="voiceS"] div[role*="button"]:nth-child(1):hover ~ div[role*="button"]:nth-child(2) *[class*="textC"] {
+    text-decoration: underline;
 }
 
 
