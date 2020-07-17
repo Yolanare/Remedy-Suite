@@ -5,7 +5,7 @@ The goal is to do something to *remedy* the weaknesses of these services by maki
 With CSS, there are many ways of doing this, especially with attribute selectors <i>(the day I knew these existed just turned my world upside down)</i>.
 
 ## I'll call the thing "Remedy Suite". *Sounds cool nah?*
-On this git, you have access to all the remedies separated in folders. Once you've downloaded one, you wont need to download it a new time to update it, they will automatically be since i'll link them to the world wide web.<br>
+On this git, you have access to all the remedies separated in folders. Once you've downloaded one, you won't need to download it a new time to update it, they will automatically be since I'll link them to the world wide web.<br>
 <br>
 
 # My plans
@@ -23,9 +23,9 @@ As I work on the remedies, I'm just going to assume that the people who are look
 <br>
 
 # How
-I may in the future create an extension for browser to inject the CSS in the websites, but for the moment since I'm not focusing on that, I'll recommand some that do the job perfectly.
+I may in the future create an extension for browser to inject the CSS in the websites, but for the moment since I'm not focusing on that, I'll recommend some that do the job perfectly.
 * **To inject CSS on a website: [Live editor for CSS, Less & Sass](https://github.com/webextensions/live-css-editor)**<br>
-*You need to **be on the page of the service** you want to use Remedy on, **open the extention** (black arrow at the top right of the browser usually) and then **paste in the "@import url(...)"** that you can find in the folder of the Remedy you want*<br>
+*You need to **be on the page of the service** you want to use Remedy on, **open the extension** (black arrow at the top right of the browser usually) and then **paste in the "@import url(...)"** that you can find in the folder of the Remedy you want*<br>
 *Don't forget to click on the pin icon at the top right of the little blue window so it loads automatically at every start of the page*<br>
 * **For Discord desktop app: [BetterDiscord](https://betterdiscord.net/home/)**<br>
 *Put the file in the theme folder, go to "Settings" > "Themes" > "Open Theme folder" at the top*
