@@ -9,13 +9,13 @@
     --tr-quick-1: 0.6s var(--tr-quick-1-t);
     --tr-quick-11-t: cubic-bezier(0.2, 0.8, 0, 1);
 
-    --tr-normal-21: 0.5s ease;
+    --tr-normal-21: 0.45s ease;
     --tr-normal-2: 0.3s ease;
     --tr-normal-12: 0.2s ease;
     --tr-normal-1: 0.17s ease;
     --tr-normal-11: 0.13s ease;
     --tr-normal-111: 75ms ease;
-    --tr-normal-1111: 50ms linear;
+    --tr-normal-1111: 35ms linear;
 
     --blurple: rgb(114, 137, 218); /*#7289da*/
     --blurple-light: rgb(123, 149, 237);
@@ -24,6 +24,9 @@
 ::selection {
     color: #f5f5f5;
     background: rgba(114, 137, 218, 0.65);
+}
+a[href]::selection {
+    color: rgb(191, 203, 255);
 }
 
 /*/-- ANIMATIONS --/*/
@@ -42,6 +45,7 @@
     100% { opacity: 1; }
 }
 
+
 /*/-- TRANSITIONS --/*/
 div[class*="chat"] div[id*="messages-"] div[class*="blockedSystemMessage"] div[class*="blockedMessageText"] span /*blocked msg*/,
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"] div[class*="channelNameChange"] > div[class*="content"] > strong /*chat logs channel name change*/,
@@ -50,7 +54,7 @@ div[class*="container"] > section[class*="container"] div[class*="item"] /*toolb
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"] > div[class*="layout"] div[class*="nameAndDecorators"] svg:not([class*="botTag"]) /*members list server/group owner icon*/,
 span[class*="botTag"] /*members verified bots box*/, svg[class*="botTag"] /*members verified bots icon*/,
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section /*home active now section*/,
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div:nth-child(2) /*home active now text*/,
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section *[class*="textC"] /*home active now text*/,
 div[id="app-mount"] div[class*="withFrame"][class*="titleBar"] div[class*="winButton"][aria-label][role="button"] /*frame buttons*/ {
     transition: var(--tr-normal-2);
 }
@@ -62,29 +66,28 @@ div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="memb
 *:hover > div[class*="layout"] div[class*="nameAndDecorators"] span[class*="botTag"],
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover /*home active now*/,
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section,
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover > div div:nth-child(2) {
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover *[class*="textC"] {
     transition: var(--tr-normal-1);
 }
 
 /*hover burple*/
 div[class*="chat"] div[id*="messages-"] div[class*="blockedSystemMessage"] div[class*="blockedMessageText"] span:hover /*blocked msg*/,
-div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="channelNameChange"] > div[class*="content"] > strong /*logs*/,
+html[class^="mouse-mode"]  div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="channelNameChange"] > div[class*="content"] > strong /*logs*/,
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] div[class*="channelNameChange"] > div[class*="content"] > strong,
-div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover a[class*="anchorUnderlineOnHover"],
+html[class^="mouse-mode"] div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover a[class*="anchorUnderlineOnHover"],
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] a[class*="anchorUnderlineOnHover"] {
     color: var(--blurple) !important;
 }
 
-/*/-- ANTI-ALIASING FORCING --/*/
+
+/*/-- RENDERING SMOOTHING --/*/
 /*bc otherwise we get a weird glitch effect*/
-div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"] /*member's name in members list*/,
-div[class*="chat"] div[class*="message-"] h2 /*member's name in chat*/ {
-    transform: rotateX(0.0001deg);
+div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"] div[class*="name-"] span,
+div[class*="chat"] div[class*="message-"] h2 span[class*="username"] /*member's name in chat*/,
+div[class*="sidebar"] div[id*="channels-"] div[class*="children"] div[class*="mentionsBadge"] /*channel mention pill*/ {
+    transform: translateZ(0);
 }
-div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"],
-div[class*="chat"] div[class*="message-"] h2 span[class*="username"] /*member's name in chat more specifically*/ {
-    text-shadow: 0 0 0 currentColor; /*because AAF renders thinner letters, and somehow they're back to normal with this effect*/
-}
+
 
 /*/- MISCELLANEOUS -/*/
 /*/ SEARCH BARS /*/
@@ -109,24 +112,27 @@ section div[class*="toolbar"] > div[class*="search"] > div[class*="search"] > di
     transition: color var(--tr-normal-1);
 }
 
+
 /*/ CONTEXT MENU, POPOUTS /*/
 div[class*="layerC"] div[role="menu"] div[role="group"]:nth-child(1) > div[class*="customItem"][role*="menuitem"] {
     border-radius: 50%;
 }
-
 /* TR */
 /*labels*/
 div[class*="layerC"] div[role="menu"] div[role*="menuitem"]:not([id*="-roles-"]) > div[class*="label"] /*main*/,
 div[class*="layerC"] div[role="menu"] div[role*="menuitem"] > div[class*="label"] > div[class*="subtext"] /*main*/,
 div[class*="layerC"] div[role="menu"] div[role*="menuitem"] div[class*="label"] span /*roles*/,
-div[class*="layerC"] div[role="menu"] div[role*="menuitem"] svg > * /*icons*/ {
-    transition: color var(--tr-normal-2);
+div[class*="layerC"] div[role="menu"] div:not([class*="submenuC"]) > div[role*="menuitem"] svg > * /*icons*/,
+div[class*="layerC"] div[role="menu"] div[class*="submenuC"] svg[class*="arrow"] {
+    transition: var(--tr-normal-2);
+    transition-property: color, transform !important;
 }
 div[class*="layerC"] div[role="menu"] div[class*="focused"]:not([id*="-roles-"]) > div[class*="label"],
 div[class*="layerC"] div[role="menu"] div[class*="focused"] > div[class*="label"] > div[class*="subtext"],
 div[class*="layerC"] div[role="menu"] div[class*="focused"] div[class*="label"] span,
-div[class*="layerC"] div[role="menu"] div[role*="menuitem"]:hover svg > * {
-    transition: color var(--tr-normal-1);
+div[class*="layerC"] div[role="menu"] div:not([class*="submenuC"]) > div[role*="menuitem"]:hover svg > *,
+div[class*="layerC"] div[role="menu"] div[class*="submenuC"] div[class*="focused"] svg[class*="arrow"] {
+    transition: var(--tr-normal-1);
 }
 /*bg*/
 div[class*="layerC"] div[role="menu"] div[role*="menuitem"] /*main*/,
@@ -140,13 +146,20 @@ div[class*="layerC"] div > div[aria-label] > div > div[class*="rap"]:hover {
     transition: background-color var(--tr-normal-1);
 }
 
+div[class*="layerC"] div[role="menu"] div[class*="submenuC"] svg[class*="arrow"] {
+    transform: rotate(-90deg) !important;
+}
+div[class*="layerC"] div[role="menu"] div[class*="submenuC"] div[class*="focused"] svg[class*="arrow"] {
+    transform: rotate(0deg) !important;
+}
+
 /* SPAWN */
-@keyframes contextMenu-spawn-h {
+@keyframes contextMenu-Spawn-h {
     0% { min-height: 20px; padding: 0 8px; }
     100% { min-height: 32px; padding: 6px 8px; }
 }
 div[class*="layerC"] div[role="menu"] div[class*="item"][class*="labelContainer"][role*="menuitem"] /*main*/ {
-    animation: contextMenu-spawn-h 0.25s 1ms cubic-bezier(0.2, 0.6, 0, 1);
+    animation: contextMenu-Spawn-h 0.25s 1ms cubic-bezier(0.2, 0.6, 0, 1);
 }
 div[class*="layerC"] div[role="menu"] /*main*/,
 div[class*="layerC"] div[role="menu"] div[class*="submenu"] div[class*="layer"] /*submenu*/,
@@ -160,26 +173,25 @@ div[class*="animator"] > div[class*="popout"][aria-label][role="dialog"] > div:n
     animation: opacity-fadein-delay5 0.6s var(--tr-smooth-1-t);
 }
 
-@keyframes toolbarPopout-spawn {
+@keyframes toolbarPopout-Spawn {
     0% { transform: translateY(20px); }
     100% { transform: translateY(0px); }
 }
 div[class*="layerC"] div[class*="recentMentions"],
-div[class*="layerC"] div[id*="popout"] > div[role*="list"] > div,
+div[class*="layerC"] div[id*="popout"] > div[role*="list"],
 div[class*="layerC"] div[id*="popout"] > div[role*="dialog"] > div {
-    animation: toolbarPopout-spawn var(--tr-quick-1),
+    animation: toolbarPopout-Spawn var(--tr-quick-1),
                 opacity-fadein 0.3s var(--tr-smooth-1-t);
 }
-
 *[class*="translate"][class*="didRender"], *[class*="userPopout"] /*user card*/ {
     transition-duration: 0.6s !important;
     transition-timing-function: var(--tr-quick-1-t) !important;
 }
-
 /*old user cards spawn*/
 div[class*="popouts"] > div[class*="noArrow"][class*="popout"] {
     animation: opacity-fadein 0.2s var(--tr-smooth-1-t);
 }
+
 
 /*/ PROTIPS /*/
 div[class*="protip-"] > h3[class*="pro-"],
@@ -200,6 +212,7 @@ div[class*="protip-"]:hover,
 div[id*="popout"] div[id="pinned-messages"] div[class*="footer"]:hover {
     cursor: help;
 }
+
 
 /*/ BOTTAGS /*/
 span[class*="botTag"],
@@ -284,10 +297,11 @@ div[class*="container"] div[class*="peopleColumn"] div[class*="peopleListItem"] 
     transition: var(--tr-normal-2);
 }
 
+
 /*/ CHAT MESSAGES /*/
 div[class*="chat"] div[id*="messages-"] /*msg*/,
 div[class*="chat"] div[id*="messages-"][class*="mentioned"]::before /*(selected mentioned msg left yellow bar)*/ {
-    transition: var(--tr-normal-2);
+    transition: var(--tr-normal-12);
 }
 
 /*/ CHAT MSG EDITED /*/
@@ -320,12 +334,15 @@ div[class*="chat"] div[id*="messages-"] {
 div[class*="chat"] div[id*="messages-"][class*="selected"] {
     box-shadow: 0 0 0 4px var(--background-message-hover);
 }
-div[class*="chat"] div[id*="messages-"]:hover,
+div[class*="chat"] div[id*="messages-"]:hover {
+    transition: var(--tr-normal-1),
+                box-shadow var(--tr-normal-12);
+}
 div[class*="chat"] div[id*="messages-"][class*="selected"],
 div[class*="chat"] div[id*="messages-"][class*="selected"][class*="mentioned"]::before,
 div[class*="chat"] div[id*="messages-"][class*="mentioned"]:hover::before {
-    transition: var(--tr-normal-11),
-                box-shadow 0.3s cubic-bezier(0.2, 0.6, 0, 3);
+    transition: var(--tr-normal-1),
+                box-shadow 0.3s cubic-bezier(0.3, 0.4, 0, 2.85);
 }
 
 div[class*="chat"] div[id*="messages-"][class*="mentioned"] {
@@ -338,7 +355,7 @@ div[class*="chat"] div[id*="messages-"][class*="mentioned"]::before {
     box-shadow: 0 0 0 0 #faa61a;
 }
 div[class*="chat"] div[id*="messages-"][class*="selected"][class*="mentioned"]::before {
-    box-shadow: -4px 0 0 3px #faa61a;
+    box-shadow: -3px 0 0 3px #faa61a;
 }
 
 @keyframes msgActionsCreationAniFix {                /*Buttons are created only when hovering msg for the first time*/
@@ -347,6 +364,7 @@ div[class*="chat"] div[id*="messages-"][class*="selected"][class*="mentioned"]::
     100% { opacity: 1; transform: translateX(0px); } /*they do not fade in (they don't have the time since they need to go from 1 to 0 first)*/
 }                                                    /*but they only fade out, and we want the fade in*/
 div[class*="chat"] div[id*="messages-"] div[class*="buttonC"] {
+    z-index: 2; /*appears on top of "NEW" divider*/
     opacity: 0;
     animation: msgActionsCreationAniFix 0.5s forwards;
 }
@@ -373,7 +391,7 @@ div[class*="chat"] div[id*="messages-"][class*="selected"] div[class*="buttonC"]
 }
 div[class*="chat"] div[id*="messages-"]:hover span[class*="timestamp"]:nth-child(1),
 div[class*="chat"] div[id*="messages-"][class*="selected"] span[class*="timestamp"]:nth-child(1) {
-    transition: opacity var(--tr-normal-11),
+    transition: opacity var(--tr-normal-1),
                 transform 0.5s var(--tr-quick-1-t);
 }
 /*default step*/
@@ -391,21 +409,19 @@ div[class*="chat"] div[id*="messages-"][class*="selected"] span[class*="timestam
     opacity: 0.7;
     transition: var(--tr-normal-2),
                 margin var(--tr-quick-1),
-                transform 0.5s var(--tr-quick-1-t);
+                transform 0.35s var(--tr-quick-1-t);
 }
-        /* Sliding content to the side
-        Working way better than expected but works on too much cases
-        ("selected-*" class appears even when opening users cards)
-        So it's less appealing unfortunately
-        */
+    /* Sliding content to the side
+    Working way better than expected but works on too much cases
+    ("selected-*" class appears even when opening users cards)
+    So it's less appealing unfortunately
+    */
+    /*div[id="app-mount"] > div[style]:not([tabindex="0"]) ~ div[class*="app-"]*/
 /*div[class*="chat"] div[id*="messages-"][class*="selected"] div[class*="messageContent"],
 div[class*="chat"] div[id*="messages-"][class*="selected"] > div[class*="container"] > *:not([class*="reactions"]) {
+    transform: translateX(5px);
     transition: opacity var(--tr-normal-1),
                 transform var(--tr-quick-1);
-}
-div[class*="chat"] div[id*="messages-"][class*="selected"] div[class*="messageContent"],
-div[class*="chat"] div[id*="messages-"][class*="selected"] > div[class*="container"] > *:not([class*="reactions"]) {
-    transform: translateX(5px);
 }*/
 
 /*/ CHAT BLOCKED MESSAGES /*/
@@ -416,16 +432,17 @@ div[class*="chat"] div[id*="messages-"] div[class*="blockedSystemMessage"]:hover
     color: var(--text-muted);
 }
 
+
 /*/ CHAT LOGS /*/
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"] {
     cursor: default;
 }
 
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"] div[class*="iconContainer"] {
-    transition: margin var(--tr-normal-2),
+    transition: margin var(--tr-normal-12),
                 filter 0.4s ease;
 }
-div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="iconContainer"],
+html[class^="mouse-mode"] div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="iconContainer"],
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] div[class*="iconContainer"] {
     margin-right: 11px;
     filter: contrast(1.75);
@@ -433,10 +450,56 @@ div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected
                 filter 0.3s ease;
 }
 
-div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="channelNameChange"] > div[class*="content"] > strong,
+html[class^="mouse-mode"] div[class*="chat"] div[id*="messages-"][class*="systemMessage"]:hover div[class*="channelNameChange"] > div[class*="content"] > strong,
 div[class*="chat"] div[id*="messages-"][class*="systemMessage"][class*="selected"] div[class*="channelNameChange"] > div[class*="content"] > strong {
     letter-spacing: 0.5px;
     word-spacing: 0.5px;
+    transition: var(--tr-normal-1),
+                letter-spacing 0.225s cubic-bezier(0.6, 0.5, 0, 2);
+}
+
+
+/*/ CHAT NEW MESSAGES DIVIDER /*/
+@keyframes chatNew-Spawn-divider {
+    15% { width: 0%; left: 50%; margin-left: 0.1rem /*~ 0.125 calc(1rem - 0.875rem)*/; margin-right: 0rem; }
+    100% { width: calc(100% - (1.875rem)) /*1rem + 0.875rem*/; left: 0%; margin-left: 1rem; margin-right: 0.875rem; }
+}
+@keyframes chatNew-Spawn-pill {
+    0% { transform: scaleY(0); }
+    100% { transform: scaleY(1); }
+}
+@keyframes chatNew-Spawn-pill-color {
+    0% { color: #f04747; }
+    100% { color: #FFF; }
+}
+@keyframes chatNew-Bounce-pill {
+    0%   { transform: translateX(0); }
+    50%   { transform: translateX(0); }
+    73.5%  { transform: translateX(-0.5rem); }
+    80%  { transform: translateX(-0.5rem); }
+    100% { transform: translateX(0); }
+}
+
+div[class*="chat"] div[class*="divider-"][class*="Unread"] {
+    opacity: 0 !important;
+    animation: chatNew-Spawn-divider 1s cubic-bezier(0.6, 0.65, 0, 1),
+                opacity-fadein 0.4s 0.15s ease forwards;
+    /*display: none;*/
+}
+div[class*="chat"] div[class*="divider-"][class*="Unread"] span[class*="unreadPill"] {
+    transform: scaleY(0);
+    color: #f04747;
+    animation: chatNew-Spawn-pill 0.4s 1s cubic-bezier(0.35, 0.9, 0, 1.8) forwards,
+                chatNew-Spawn-pill-color 0.8s 1s cubic-bezier(0.35, 0.9, 0, 1) forwards,
+                chatNew-Bounce-pill 1.05s 1.4s ease alternate infinite;
+}
+div[class*="chat"] div[class*="divider-"][class*="Unread"] span[class*="unreadPill"]::after /*hiding the bar behind the pill*/ {
+    position: absolute;
+    right: -0.5rem;
+    width: 0.5rem;
+    height: 1.1px; /*a very little bit bigger to be sure*/
+    background-color: var(--background-primary);
+    content: "";
 }
 
 
@@ -451,17 +514,21 @@ div[class*="channelName"] input[name="channel_name"][value] ~ div {
     transition: var(--tr-normal-1);
 }
 
-div[class*="container"] > section[class*="container"] div[class*="item"]:not([style*="background-color: rgba(67, 181, 129, 0.2);"]):nth-last-child(1):hover /*add friend hover color*/ {
+div[class*="container"] > section[class*="container"] div[class*="item"]:not([style*="background-color: rgba(67, 181, 129, 0.2);"]):nth-last-child(1):hover /*add friend color*/ {
     background-color: #3ca374 !important;
+}
+div[class*="container"] > section[class*="container"] div[class*="item"]:not([style*="background-color: rgba(67, 181, 129, 0.2);"]):nth-last-child(1):active {
+    background-color: #369167 !important;
 }
 div[class*="container"] > section[class*="container"] div[class*="item"][style*="background-color: rgba(67, 181, 129, 0.2);"]:nth-last-child(1) {
     cursor: default;
 }
 
+
 /*/- SECONDARY -/*/
 /*/ USER AREA /*/
 section[class^="panels"][aria-label] > div[class^="container"] {
-    height: 65px;
+    height: 67px;
 }
 
 /*/ PEOPLE LISTS (DM, MEMBERS) /*/
@@ -499,6 +566,12 @@ div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] > div
     border-radius: 4px !important;
 }
 
+/*highlighted*/
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="highlighted"]:hover > div[class*="layout"] {
+    color: var(--blurple);
+}
+
+/**/
 div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="member-"] {
     cursor: pointer;
 }
@@ -513,6 +586,7 @@ div[class*="chat"] main[class*="chatC"] ~ div[class*="members"] div[class*="memb
     color: var(--interactive-active);
 }
 
+
 /*/ (DM) CLOSE BUTTON /*/
 div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="content"] {
     max-width: calc(164px - 0px) !important;
@@ -520,7 +594,7 @@ div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="content"] {
 }
 div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="content"],
 div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="content"] {
-    max-width: calc(164px - 25px) !important;
+    max-width: calc(164px - 22px) !important;
 }
 div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="children"] {
     position: absolute;
@@ -541,25 +615,25 @@ div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[c
 }
 
 div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="children"] > div,
-div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="content"] {
-    transition: opacity 50ms var(--tr-normal-2),
-                transform 1.35s var(--tr-quick-2-t),
-                max-width 0.35s ease;
+div[class*="sidebar"] > nav[class*="privateChannels"] a div[class*="content"] { /*close return*/
+    transition: opacity var(--tr-normal-2),
+                transform 1.1s var(--tr-quick-2-t),
+                max-width 0.25s ease;
 }
 div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] > div,
-div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="content"] {
+div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="content"] { /*close hover bounce*/
     transition: opacity var(--tr-normal-2),
-                transform 0.5s 0.4s var(--tr-quick-1-t),
-                max-width 0.3s 0.4s ease;
+                transform 0.5s 0.4s cubic-bezier(0.5, 0.4, 0, 1.3),
+                max-width 0.25s 0.4s cubic-bezier(0.8, 0, 0.25, 1);
 }
 div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="children"] > div,
-div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="content"] {
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="content"] { /*close selected (hover of close)*/
     transition: opacity var(--tr-normal-2),
-                transform 0.5s var(--tr-quick-1-t),
+                transform 0.5s cubic-bezier(0.5, 0.4, 0, 1.3),
                 max-width 0.4s ease;
 }
 div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] > div:hover,
-div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"]:hover div[class*="children"] > div:hover {
+div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"]:hover div[class*="children"] > div:hover { /*new close hover effect*/
     opacity: 1;
     transition: opacity var(--tr-normal-1),
                 transform 0.5s 0.4s var(--tr-quick-1-t);
@@ -574,89 +648,100 @@ div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[c
     color: var(--interactive-active);
     transition: color var(--tr-normal-2);
 }
-div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] svg {
-    transition: color var(--tr-normal-2) 0.425s;
+div[class*="sidebar"] > nav[class*="privateChannels"] a:hover div[class*="children"] svg { /*close hover delay*/
+    transition: color var(--tr-normal-12) 0.465s;
 }
 div[class*="sidebar"] > nav[class*="privateChannels"] a[class*="selected"] div[class*="children"] svg {
     transition: color var(--tr-normal-2);
 }
+
 
 /*/ HEADERS (TITLES) /*/
 div[class*="sidebar"] > nav[class*="privateChannels"] h2 /*DM title*/ {
     transition: color var(--tr-normal-2);
 }
 
+
 /*/ HOME - "FIND CONV" (top) /*/
 div[class*="sidebar"] > nav > div[class*="searchBar"] > button /*search icon*/ {
 background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" style="color:rgb(114, 118, 125);" width="18" height="18" viewBox="0 0 18 18"><g><path fill="currentColor" d="M3.60091481,7.20297313 C3.60091481,5.20983419 5.20983419,3.60091481 7.20297313,3.60091481 C9.19611206,3.60091481 10.8050314,5.20983419 10.8050314,7.20297313 C10.8050314,9.19611206 9.19611206,10.8050314 7.20297313,10.8050314 C5.20983419,10.8050314 3.60091481,9.19611206 3.60091481,7.20297313 Z M12.0057176,10.8050314 L11.3733562,10.8050314 L11.1492281,10.5889079 C11.9336764,9.67638651 12.4059463,8.49170955 12.4059463,7.20297313 C12.4059463,4.32933105 10.0766152,2 7.20297313,2 C4.32933105,2 2,4.32933105 2,7.20297313 C2,10.0766152 4.32933105,12.4059463 7.20297313,12.4059463 C8.49170955,12.4059463 9.67638651,11.9336764 10.5889079,11.1492281 L10.8050314,11.3733562 L10.8050314,12.0057176 L14.8073185,16 L16,14.8073185 L12.2102538,11.0099776 L12.0057176,10.8050314 Z"></path></g></svg>');
 background-repeat: no-repeat;
 background-size: 18px;
-background-position-x: 97.5%;
+background-position-x: calc(100% - 6px);
 background-position-y: center;
 }
+
 
 /*/ HOME - ACTIVE NOW */
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] {
     transition: var(--tr-normal-21);
 }
-/* APPARITION */
-@keyframes activeNowCards-spawn-normal {
-    0% { padding: 0 16px; max-height: 0; margin-top: 0px; }
-    20% { padding: 0 16px; max-height: 0; margin-top: 0px; }
-    100% { padding: 16px 16px; max-height: 999px; margin-top: 8px; }
-}
-@keyframes activeNowCards-spawn-first {
+/* SPAWN */
+@keyframes activeNowCards-Spawn-first {
     0% { padding: 0 16px; max-height: 0; }
     20% { padding: 0 16px; max-height: 0; }
+    70% { padding: 16px 16px; }
     100% { padding: 16px 16px; max-height: 999px; }
 }
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:not(:nth-of-type(1)) {
-    animation: activeNowCards-spawn-normal 0.5s cubic-bezier(0.2, 0.7, 0, 1),
-                opacity-fadein 0.5s var(--tr-smooth-1-t);
+@keyframes activeNowCards-Spawn-normal {
+    0% { padding: 0 16px; max-height: 0; margin-top: 0px; }
+    20% { padding: 0 16px; max-height: 0; margin-top: 0px; }
+    70% { padding: 16px 16px; margin-top: 8px; }
+    100% { padding: 16px 16px; max-height: 999px; margin-top: 8px; }
 }
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:nth-of-type(1) {
-    animation: activeNowCards-spawn-first 0.5s cubic-bezier(0.2, 0.6, 0, 1),
-                opacity-fadein 0.5s var(--tr-smooth-1-t);
+    animation: activeNowCards-Spawn-first 0.75s cubic-bezier(0.2, 0.6, 0, 1),
+                opacity-fadein 0.6s var(--tr-smooth-1-t);
+}
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:not(:nth-of-type(1)) {
+    animation: activeNowCards-Spawn-normal 0.75s cubic-bezier(0.2, 0.7, 0, 1),
+                opacity-fadein 0.6s var(--tr-smooth-1-t);
 }
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] > div {
-    animation: opacity-fadein-delay15 0.7s var(--tr-smooth-1-t);
+    animation: opacity-fadein-delay15 0.65s var(--tr-smooth-1-t);
 }
 
-/* ICON */
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] header > *:not(:nth-child(2)):nth-last-child(1) /*trying someting for "playing multiple games" icon (yep that exists)*/ /**[class*="headerIcon"]*/ {
-    transition: transform var(--tr-normal-2) 50ms;
+/* ACTIVITY ICON */
+/*div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] header > *:not(:nth-child(2)):nth-last-child(1) {
+    transition: transform var(--tr-normal-12) 50ms;
 }
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"]:hover header > *:not(:nth-child(2)):nth-last-child(1),
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"][class*=" active"] header > *:not(:nth-child(2)):nth-last-child(1) {
-    transform: scale(1.125);
+    transform: scale(1.13);
     transition: transform 0.2s var(--tr-quick-1-t);
-}
+}*/
 
 /* SECTIONS HOVER */
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div[class*="partyMembers"] > div {
-    transition: var(--tr-normal-2);
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section div[class*="partyMembers"] > div {
+    margin-top: 0;
+    transform: translateY(0px);
+    margin-right: 0;
+    transition: margin-top 0.1s 0.1s linear,
+                transform 0.1s 0.1s linear,
+                margin-right var(--tr-normal-2);
 }
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover > div div[class*="partyMembers"] > div {
-    transform: scale(1.11);
-    transition: 0.25s cubic-bezier(0.1, 0.65, 0, 2.5);
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover div[class*="partyMembers"] > div {
+    margin-top: -5px;
+    transform: translateY(5px);
+    margin-right: 2px;
+    transition: margin-top 0.2s cubic-bezier(0.2, 0.4, 0, 1),
+                transform 0.375s cubic-bezier(0.7, 0.4, 0, 1),
+                margin-right var(--tr-normal-12);
 }
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div[class*="partyMembers"] > div:nth-child(1) {
-    transition-delay: calc(65ms*0); /*if only there was a way to do loops...*/
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover div[class*="partyMembers"] > div:nth-child(1) {
+    transition-delay: 0ms;
 }
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div[class*="partyMembers"] > div:nth-child(2) {
-    transition-delay: calc(65ms*1);
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover div[class*="partyMembers"] > div:nth-child(2) {
+    transition-delay: 70ms;
 }
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div[class*="partyMembers"] > div:nth-child(3) {
-    transition-delay: calc(65ms*2);
-}
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div[class*="partyMembers"] > div:nth-child(4) {
-    transition-delay: calc(65ms*3);
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover div[class*="partyMembers"] > div:nth-child(3) {
+    transition-delay: 140ms;
 }
 
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section > div div:nth-child(2) {
-    opacity: 0.9;
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section *[class*="textC"] {
+    opacity: 0.8;
 }
-div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover > div div:nth-child(2) {
+div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover *[class*="textC"] {
     opacity: 1;
 }
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"] > section:hover {
@@ -669,7 +754,64 @@ div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] div[class^="body"]
 }
 
 
+/*/ NOTIF MENTIONS -CHANNELS /*/
+@keyframes channelMentionBadge-Spawn {
+    0%   { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+@keyframes channelMentionBadge-Bounce {
+    0%   { transform: scale(1); }
+    15%  { transform: scale(1); }
+    80%  { transform: scale(1.1); }
+    100% { transform: scale(1.1); }
+}
+div[class*="sidebar"] div[id*="channels-"] div[class*="children"] div[class*="mentionsBadge"] {
+    transform: scale(1);
+    animation: channelMentionBadge-Spawn 0.4s cubic-bezier(0.4, 0.8, 0, 1.4) forwards,
+                opacity-fadein 0.3s ease,
+                channelMentionBadge-Bounce 0.5s 1s cubic-bezier(0.3, 0.2, 0, 1) alternate infinite;
+    /*display:none;*/
+}
+/*@keyframes channelMentionBadge-Flip {
+    0%   { transform: rotate(0deg); }
+    90%   { transform: rotate(0deg); }
+    100%  { transform: rotate(360deg); }
+}
+div[class*="sidebar"] div[id*="channels-"] div[class*="children"] div[class*="mentionsBadge"] > div {
+    animation: channelMentionBadge-Flip 8s 0.5s cubic-bezier(0.3, 0.5, 0, 1) infinite;
+}*/
+
+
 /*/- TERTIARY -/*/
+/*/ NOTIF MENTIONS - GUILDS /*/
+@keyframes guildsMentionBadge-Bounce {
+    0%    { transform: scale(1); }
+    10%   { transform: scale(1.075); }
+    22.5% { transform: scale(1.075); }
+    85%   { transform: scale(1); }
+    100%  { transform: scale(1); }
+}
+@keyframes guildsMentionBadge-Flip {
+    0%   { transform: rotate(0deg); }
+    80%  { transform: rotate(0deg); }
+    100% { transform: rotate(720deg); }
+}
+nav[class*="guilds"] div[class*="listItem"] div[class*="pill"] + div svg mask use:nth-child(3) {
+    display: none;
+}
+nav[class*="guilds"] div[class*="listItem"] div[class*="pill"] + div div[class*="lowerBadge"] > div {
+    box-sizing: content-box;
+    border: solid 4px var(--background-tertiary);
+    border-radius: 16px;
+    animation: guildsMentionBadge-Bounce 1.25s 0.5s cubic-bezier(0.4, 0.7, 0, 1) infinite;
+}
+nav[class*="guilds"] div[class*="listItem"] div[class*="pill"] ~ div div[class*="lowerBadge"] {
+    right: -4px;
+    bottom: -4px;
+    animation: guildsMentionBadge-Flip 7.5s 0.5s cubic-bezier(0.4, 0.5, 0, 1) infinite;
+}
+
+
 /*/ TITLE BAR /*/
 /* TITLE */
 div[id="app-mount"] div[class*="withFrame"][class*="titleBar"] div[class*="wordmark"] {
@@ -697,3 +839,4 @@ div[id="app-mount"] div[class*="withFrame"][class*="titleBar"] div[class*="wordm
 div[id="app-mount"] div[class*="withFrame"][class*="titleBar"] div[class*="winButton"][aria-label][role="button"]:hover {
     transition: var(--tr-normal-111);
 }
+
