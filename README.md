@@ -9,17 +9,18 @@ On this git, you have access to all the remedies separated in folders. Once you'
 <br>
 
 # My plans
-I'll start working on Discord, next after widely finishing it I'll do Twitter <i>(I really hate how they made their interface, I'll put back the centered timeline)</i>. For the third one i thought about YouTube, why not. I'll see in the future for more services, I don't need to plan everything from the beginning since I don't even know if I'll be able to handle these three alone.
+I'll start working on Discord, next after widely finishing it I'll do Twitter <i>(I really hate how they made their interface, I'll put back the centered timeline)</i>. For the third one i thought about YouTube, why not. I'll see in the future for more services, I don't need to plan everything from the beginning since I don't even know if I'll be able to handle these three alone.<br>
+<br>
 
-## Little Disclaimer
+# Disclaimer
 ### Rights
 I am not the creator of the services supported in the Remedy Suite. All I wish to do is to improve the experience of all users using them and I do not wish in any way to appropriate the rights to these services. This is actually one of the reasons why Remedy **is** and **will remain free**. *And I'm working on it in my free time btw.*
 
 ### Performances
-As I work on the remedies, I'm just going to assume that the people who are looking for this kind of strange customization are not complete computer newbies, and therefore don't have a toaster as a computer. Which means that I don't take small PCs that much into account. I'm not saying that I skip optimization and performances, but I can't really do much for that. These services on their own are already **optimized** for all computers, no matter how low-powered they may be *(normally)*. And that's precisely why in some cases it may look quite cheap, but it's in fact sacrifices that the designers had to make because some of you are wandering around on the web with toasters. *I'm doing the opposite so obviously it's probably not as easy on your toaster.*
+As I work on the remedies, I'm just going to assume that the people who are looking for this kind of strange customization are not complete computer newbies, and therefore don't have a toaster as a computer. Usually the services are optimized to run smoothly on small PCs. Remedy goes a bit against this optic. Of course there will be optimizations. But since we add extra effects to many of the features, it won't run as smoothly as it would without it.
 
 *And so this is mainly the reason why I want to remain faithful to the original UI, to push it to its peak.*<br>
-*When developing them, I put myself inside the shoes of the real guy who made the interface (and if there are more than one designer I have schizophrenia), and I try my best to adapt what I do according to the user's needs and the aesthetic of the UI.*<br>
+*When developing them, I put myself inside the shoes of the user exploring the interface and using it regularly as well as being in the mindset of one of the UI's designers. I try my best to adapt what I do according to the user's needs and the aesthetic of the UI.*<br>
 <br>
 
 # How
@@ -42,3 +43,6 @@ I've made a Google Sheet so I can stay organized, for you to check if something 
 If you want to suggest any idea to improve any of the remedies, or if you found something not working:
 * **[Reach me on Twitter](https://twitter.com/Yolanare)**
 * [Submit a request **on the "Issues" tab of the git**](https://github.com/Yolanare/Remedy-Suite/issues)
+<br>
+
+~~~~
