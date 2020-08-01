@@ -769,7 +769,7 @@ div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] {
 @keyframes activeNowCards-Spawn {
     0% { max-height: 0; padding: 0 16px; margin-bottom: 0px; }
     10% { max-height: 0; padding: 0 16px; margin-bottom: 0px; }
-    85% { padding: 16px 16px; margin-bottom: 8px; }
+    75% { padding: 16px 16px; margin-bottom: 8px; }
     100% { max-height: 700px; padding: 16px 16px; margin-bottom: 8px; }
 }
 div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] {
@@ -777,7 +777,7 @@ div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] {
     margin-bottom: 8px;
     transform-origin: top;
     opacity: 0;
-    animation: activeNowCards-Spawn 1s cubic-bezier(0.2, 0.6, 0, 1),
+    animation: activeNowCards-Spawn 1s cubic-bezier(0.3, 0.3, 0, 1),
                 opacity-fadein 0.425s 0.1s ease forwards;
 }
 /*div[class^="nowPlayingColumn"] > div > div[class^="itemCard"] > div {
